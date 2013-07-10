@@ -4,7 +4,39 @@
     <title>simple-gallery row-layout example</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="../../simple-gallery.js"></script>
+    <style>
+        #images {
+        	text-align:center;
+        }
+        
+        #images img {
+        	width:200px;
+        }
+        
+        #full {
+            margin:10px auto;
+            width:720px;
+            height:480px;
+        }
+    </style>
 </head>
 <body>
+    <div id="images">
+        <img src="../images/img1.jpg" />
+        <img src="../images/img2.jpg" />
+        <img src="../images/img3.jpg" />
+        <img src="../images/img4.jpg" />
+        <img src="../images/img5.jpg" />
+        <img src="../images/img6.jpg" />
+        <img src="../images/img7.jpg" />
+        <img src="../images/img8.jpg" />
+        <img src="../images/img9.jpg" />
+    </div>
+    <div id="full">
+    </div>
+    
+    <script>
+        $('#images img').gallery({target: "#full"});
+    </script>
 </body>
 </html>
