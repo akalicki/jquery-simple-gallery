@@ -91,6 +91,11 @@ photo transitions.
 representing whether to restart the slideshow from the beginning after 
 reaching the end of the collection.
 
++ `selectClass` (optional, *default = selected*) - the class name that gets 
+added and removed from each thumbnail image in turn when it is displayed in 
+the target destination.  This allows you to further customize the look of the 
+thumbnail for the image that is currently being shown in the gallery.
+
 ### Using Options ###
 
 Simple-Gallery options can be supplied to the plugin in one of two ways upon 
@@ -122,19 +127,17 @@ are declared public and can be completely overridden:
 sets the target image's background properties and begins the opacity at 0 so 
 it can fade in.
 
-+ `$.fn.gallery.changeToImg` - called when an image should transition out of 
-being displayed.  Default behavior fades the current image out, then calls the 
-`$.fn.gallery.fetchImg` to fetch the next image in the cycle.
++ `$.fn.gallery.startTransition` - called when an image should transition out of 
+being displayed.  Default behavior fades the current image out using the 
+`changeTime` and `easing` options supplied.
 
-+ `$.fn.gallery.fetchImg` - called when a new image should be loaded in the 
-target destination.  Default behavior changes the target's background-image 
-url, fades in the new image, and sets the timer to wait until the next image 
-should be called.
++ `$.fn.gallery.endTransition` - called when a new image should be 
+transitioned into the target destination.  Default behavior fades the new 
+image in using the `changeTime` and `easing` options supplied.
 
 Overriding any or all of these can drastically change the appearance and 
-animation of the plugin.  The most common reason to override them would 
-probably be if you wanted a different transition than a fade, but the 
-possibilities are endless!
+animation of the plugin.  The most common reason to override them would be if 
+you wanted a different transition than a fade.
 
 ## Examples ##
 
