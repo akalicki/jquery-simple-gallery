@@ -1,7 +1,6 @@
 /*
- * simple-gallery.js
+ * simple-gallery.js - v1.0.0
  * Author: Alex Kalicki (https://github.com/akalicki)
- * v1.0.0
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
  * highly customizable photo galleries using standard jQuery notation.
