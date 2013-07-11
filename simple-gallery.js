@@ -8,19 +8,9 @@
  * All work contained in this file is licensed under a Creative Commons Attribution 3.0
  * Unported License.  Please contact the copyright holder with further questions.
 */
-(function($) {
+;(function($) {
     $.fn.gallery = function(options) {
-        
-        // create defaults which can be overridden if requested
-        $.fn.gallery.defaults = {
-            target: "",
-            startImg: 0,
-            waitTime: 5000,
-            changeTime: 700,
-            easing: "swing",
-            restartOnEnd: true
-        };
-        
+         
         // merge defaults and user-supplied options
         var options = $.extend($.fn.gallery.defaults, options);
         
@@ -78,5 +68,15 @@
             $(this).click(onClick);
         });
         
+    };
+    
+    // create public defaults which can be overridden if requested
+    $.fn.gallery.defaults = {
+        target: "",
+        startImg: 0,
+        waitTime: 5000,
+        changeTime: 700,
+        easing: "swing",
+        restartOnEnd: true
     };
 })(jQuery);
