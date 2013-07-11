@@ -15,7 +15,6 @@
         var obj = this;
         var options = $.extend($.fn.gallery.defaults, options);
         var nextImg = options.startImg;
-        var cycle = window.setInterval(loadNext, options.waitTime);
         
         // set the target background CSS, begin cycle
         $.fn.gallery.init = function() {
@@ -38,16 +37,16 @@
             var url = obj.get(index).src;
             $(options.target)
                 .css("background-image", "url("+url+")")
-                .animate({"opacity": 1}, options.change, options.easing);
+                .animate({"opacity": 1}, options.changeTime, options.easing,
+                    function(){ cycle = window.setTimeout(loadNext, options.waitTime); });
             nextImg = index + 1;
         }
         
         // switch to given image on click, reset cycle interval
         function onClick() {
-            window.clearInterval(cycle);
-            nextImg = $(this).index();
+            window.clearTimeout(cycle);
+            nextImg = obj.index($(this));
             $.fn.gallery.changeToImg(nextImg);
-            cycle = window.setInterval(loadNext, options.waitTime);
         }
         
         // load the next image in cycle
@@ -60,7 +59,7 @@
                 $.fn.gallery.changeToImg(nextImg);
             }
             else {  // end of cycle, don't restart
-                window.clearInterval(cycle);
+                window.clearTimeout(cycle);
             }
         }
         
