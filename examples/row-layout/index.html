@@ -11,12 +11,23 @@
         
         #images img {
         	width:200px;
+        	padding:0;
+        	transition: all 500ms;
+            -webkit-transition:all 500ms;
+            -moz-transition:all 500ms;
+            -ms-transition:all 500ms;
+            -o-transition:all 500ms;
         }
         
         #full {
             margin:10px auto;
             width:720px;
             height:480px;
+        }
+        
+        #images img.selected {
+            width:250px;
+            padding:0 5px;
         }
     </style>
 </head>

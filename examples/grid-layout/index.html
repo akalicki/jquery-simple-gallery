@@ -12,12 +12,22 @@
         
         #images img {
         	width:150px;
+        	padding:5px;
+        	transition: all 200ms;
+            -webkit-transition:all 200ms;
+            -moz-transition:all 200ms;
+            -ms-transition:all 200ms;
+            -o-transition:all 200ms;
         }
         
         #full {
             float:left;
-            width:458px;
-            height:312px;
+            width:470px;
+            height:333px;
+        }
+        
+        .selected {
+        	background-color:gray;
         }
     </style>
 </head>
@@ -43,8 +53,12 @@
     </div>
     
     <script>
-        $('#images img').gallery({target: "#full", startImg: 3, easing: "linear",
-                                  waitTime: 1000, changeTime: 300, restartOnEnd: false});
+        $('#images img').gallery({target: "#full",
+                                  startImg: 3,
+                                  easing: "linear",
+                                  waitTime: 1000,
+                                  changeTime: 300,
+                                  restartOnEnd: false});
     </script>
 </body>
 </html>
