@@ -1,7 +1,18 @@
+/*
+ * simple-gallery.js
+ * Author: Alex Kalicki (https://github.com/akalicki)
+ * v1.0.0
+ *
+ * simple-gallery.js is a lightweight jQuery extension for quickly creating
+ * highly customizable photo galleries using standard jQuery notation.
+ *
+ * All work contained in this file is licensed under a Creative Commons Attribution 3.0
+ * Unported License.  Please contact the copyright holder with further questions.
+*/
 (function($) {
     $.fn.gallery = function(options) {
         
-        // create defaults and override them later if requested
+        // create defaults which can be overridden if requested
         $.fn.gallery.defaults = {
             target: "",
             startImg: 0,
@@ -11,9 +22,11 @@
             restartOnEnd: true
         };
         
+        // merge defaults and user-supplied options
+        var options = $.extend($.fn.gallery.defaults, options);
+        
         // global plugin variables
         var obj = this;
-        var options = $.extend($.fn.gallery.defaults, options);
         var nextImg = options.startImg;
         
         // set the target background CSS, begin cycle
@@ -51,15 +64,12 @@
         
         // load the next image in cycle
         function loadNext() {
-            if (nextImg < obj.length) {  // more images in cycle
+            if (nextImg < obj.length) {       // more images in cycle
                 $.fn.gallery.changeToImg(nextImg);
             }
             else if (options.restartOnEnd) {  // end of cycle, restart
                 nextImg = 0;
                 $.fn.gallery.changeToImg(nextImg);
-            }
-            else {  // end of cycle, don't restart
-                window.clearTimeout(cycle);
             }
         }
         
