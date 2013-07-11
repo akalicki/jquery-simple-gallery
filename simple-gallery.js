@@ -18,52 +18,76 @@
         var obj = this;
         var nextImg = options.startImg;
         
-        // set the target background CSS, begin cycle
+        // set the target background CSS, perform any needed initialization
         $.fn.gallery.init = function() {
             $(options.target).css({
                 "background-repeat": "no-repeat",
                 "background-position": "center",
                 "opacity": 0
             });
-            $.fn.gallery.fetchImg(nextImg);
         }
         
-        // transition out current image, call fetch function to transition in next one
-        $.fn.gallery.changeToImg = function(index) {
-            $(options.target).animate({"opacity": 0}, options.changeTime, options.easing,
-                                      function(){ $.fn.gallery.fetchImg(index); });
+        // perform transition to remove current image from target
+        $.fn.gallery.startTransition = function() {
+            $(options.target).animate(
+                {"opacity": 0}, 
+                options.changeTime, 
+                options.easing
+            );
         }
         
-        // transition in the given image
-        $.fn.gallery.fetchImg = function(index) {
-            var url = obj.get(index).src;
-            $(options.target)
-                .css("background-image", "url("+url+")")
-                .animate({"opacity": 1}, options.changeTime, options.easing,
-                    function(){ cycle = window.setTimeout(loadNext, options.waitTime); });
+        // perform transition to add new image to target
+        $.fn.gallery.endTransition = function() {
+            $(options.target).animate(
+                {"opacity": 1}, 
+                options.changeTime, 
+                options.easing
+            );
+        }
+        
+        // select a new image to be placed in target
+        function selectImg(index) {
+            var selected = obj.get(index);
+            var url = selected.src;
+            $(options.target).css("background-image", "url(" + url + ")");
+            $("." + options.selectClass).removeClass(options.selectClass);
+            selected.className += options.selectClass;
             nextImg = index + 1;
+        }
+        
+        // transition out, select new image, transition in
+        function changeToImg(index) {
+            $.fn.gallery.startTransition();
+            $(options.target).promise().done(function() {
+                selectImg(index);
+                $.fn.gallery.endTransition();
+                $(options.target).promise().done(function() {
+                    cycle = window.setTimeout(loadNext, options.waitTime);
+                });
+            });
+        }
+        
+        // load the next image in cycle
+        function loadNext() {
+            if (nextImg < obj.length) {       // more images in cycle
+                changeToImg(nextImg);
+            }
+            else if (options.restartOnEnd) {  // end of cycle, restart
+                nextImg = 0;
+                changeToImg(nextImg);
+            }
         }
         
         // switch to given image on click, reset cycle interval
         function onClick() {
             window.clearTimeout(cycle);
             nextImg = obj.index($(this));
-            $.fn.gallery.changeToImg(nextImg);
-        }
-        
-        // load the next image in cycle
-        function loadNext() {
-            if (nextImg < obj.length) {       // more images in cycle
-                $.fn.gallery.changeToImg(nextImg);
-            }
-            else if (options.restartOnEnd) {  // end of cycle, restart
-                nextImg = 0;
-                $.fn.gallery.changeToImg(nextImg);
-            }
+            changeToImg(nextImg);
         }
         
         // initialize gallery and set click events
         $.fn.gallery.init();
+        changeToImg(nextImg);
         return this.each(function() {
             $(this).click(onClick);
         });
@@ -77,6 +101,7 @@
         waitTime: 5000,
         changeTime: 700,
         easing: "swing",
-        restartOnEnd: true
+        restartOnEnd: true,
+        selectClass: "selected"
     };
 })(jQuery);
