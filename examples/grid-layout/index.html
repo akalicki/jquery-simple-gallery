@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>simple-gallery grid-layout example</title>
+    <title>simple-gallery row-layout example</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="../../simple-gallery.js"></script>
+    <style>
+        #images {
+        	float:left;
+        	margin-right:10px;
+        }
+        
+        #images img {
+        	width:150px;
+        }
+        
+        #full {
+            float:left;
+            width:458px;
+            height:312px;
+        }
+    </style>
 </head>
 <body>
+    <div id="images">
+        <div class="row">
+            <img src="../images/img1.jpg" />
+            <img src="../images/img2.jpg" />
+            <img src="../images/img3.jpg" />
+        </div>
+        <div class="row">
+            <img src="../images/img4.jpg" />
+            <img src="../images/img5.jpg" />
+            <img src="../images/img6.jpg" />
+        </div>
+        <div class="row">
+            <img src="../images/img7.jpg" />
+            <img src="../images/img8.jpg" />
+            <img src="../images/img9.jpg" />
+        </div>
+    </div>
+    <div id="full">
+    </div>
+    
+    <script>
+        $('#images img').gallery({target: "#full", startImg: 3, easing: "linear",
+                                  waitTime: 1000, changeTime: 300, restartOnEnd: false});
+    </script>
 </body>
 </html>
