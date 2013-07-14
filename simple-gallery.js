@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v1.2.0
+ * simple-gallery.js - v1.3.0
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
@@ -65,10 +65,12 @@
                 $(this).dequeue();
             });
             $.fn.gallery.endTransition();
-            $(options.target).queue(function() {
-                cycle = window.setTimeout(loadNext, options.waitTime);
-                $(this).dequeue();
-            });
+            if (options.animate) {
+                $(options.target).queue(function() {
+                    cycle = window.setTimeout(loadNext, options.waitTime);
+                    $(this).dequeue();
+                });
+            }
         }
         
         // load the next image in cycle
@@ -101,6 +103,7 @@
     // create public defaults which can be overridden if requested
     $.fn.gallery.defaults = {
         target: "",
+        animate: true,
         startImg: 0,
         waitTime: 5000,
         changeTime: 700,

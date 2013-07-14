@@ -8,7 +8,7 @@ facility of code-reuse and fewer headaches.  simple-gallery.js creates a
 slideshow you can easily customize without having to worry about superfluous 
 code and unneeded options.
 
-**CURRENT VERSION: v1.2.0**
+**CURRENT VERSION: v1.3.0**
 
 ## Get Started ##
 
@@ -73,6 +73,10 @@ the tag to display each image as it is selected in the gallery.  The string
 does not need to be an id, as long as the selector `$(target)` will only 
 select one appropriately sized DOM element from the page to cycle your images 
 through.
+
++ `animate` (optional, *default = true*) - a boolean true/false value 
+representing whether to animate the slideshow.  If false, the target display 
+will only change images when you click on a thumbnail image.
 
 + `startImg` (optional, *default = 0*) - the zero-based index of the image to 
 start the slideshow at.  A default value of 0 will tell the plugin to start at 
