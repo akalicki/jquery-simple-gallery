@@ -8,6 +8,8 @@ facility of code-reuse and fewer headaches.  simple-gallery.js creates a
 slideshow you can easily customize without having to worry about superfluous 
 code and unneeded options.
 
+**CURRENT VERSION: v1.2.0**
+
 ## Get Started ##
 
 First thing's first!  To get started with simple-gallery.js, download the 
