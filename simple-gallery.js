@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v1.1.0
+ * simple-gallery.js - v1.2.0
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
@@ -17,6 +17,7 @@
         // global plugin variables
         var obj = this;
         var nextImg = options.startImg;
+        var cycle;
         
         // set the target background CSS, perform any needed initialization
         $.fn.gallery.init = function() {
@@ -57,13 +58,16 @@
         
         // transition out, select new image, transition in
         function changeToImg(index) {
+            $(options.target).clearQueue();
             $.fn.gallery.startTransition();
-            $(options.target).promise().done(function() {
+            $(options.target).queue(function() {
                 selectImg(index);
-                $.fn.gallery.endTransition();
-                $(options.target).promise().done(function() {
-                    cycle = window.setTimeout(loadNext, options.waitTime);
-                });
+                $(this).dequeue();
+            });
+            $.fn.gallery.endTransition();
+            $(options.target).queue(function() {
+                cycle = window.setTimeout(loadNext, options.waitTime);
+                $(this).dequeue();
             });
         }
         
