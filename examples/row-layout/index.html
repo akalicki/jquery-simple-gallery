@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>simple-gallery row-layout example</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../../jqueryui-widget.min.js"></script>
     <script src="../../simple-gallery.min.js"></script>
     <style>
         #images {
@@ -47,7 +48,7 @@
     </div>
     
     <script>
-        $('#images img').gallery({target: "#full"});
+        $('#full').gallery({source: "#images img"});
     </script>
 </body>
 </html>

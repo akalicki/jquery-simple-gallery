@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>simple-gallery grid-layout example</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../../jqueryui-widget.min.js"></script>
     <script src="../../simple-gallery.min.js"></script>
     <style>
         #images {
@@ -53,12 +54,20 @@
     </div>
     
     <script>
-        $('#images img').gallery({target: "#full",
+        $('#full').gallery({source: "#images img",
                                   startImg: 3,
                                   easing: "linear",
                                   waitTime: 1000,
-                                  changeTime: 300,
-                                  restartOnEnd: false});
+                                  changeTime: 300
+                            });
+        $("#full").on({
+            mouseenter: function() {
+                $("#full").gallery("stopAnimation");
+            },
+            mouseleave: function() {
+                $("#full").gallery("resumeAnimation");
+            }
+        });
     </script>
 </body>
 </html>
