@@ -23,9 +23,12 @@ plugin and include it after you've included both jQuery and jQuery UI:
 
 Note that the only required element of jQuery UI is the **widget** portion 
 of the UI core.  Feel free to do a custom download if you would not like to 
-include the full jQuery UI package.  I have also included a minified version 
-of the required jQuery UI code in this repository so you can download that 
-and not have to worry about going through the jQuery site.
+include the full jQuery UI package.  I have also included a 
+[minified version][jqueryui-widget] of the required jQuery UI code in this 
+repository so you can download that and not have to worry about going through 
+the jQuery site.
+
+[jqueryui-widget]: https://github.com/akalicki/jquery-simple-gallery/blob/master/jqueryui-widget.min.js
 
 The most basic usage of the simple-gallery.js plugin requires using a standard 
 jQuery selector to choose the target HTML tag in which to display the larger, 
@@ -111,7 +114,7 @@ thumbnail for the image that is currently being shown in the gallery.
 
 ### Using Options ###
 
-Simple-Gallery options can be supplied to the plugin in one of two ways.  The easiest way to do so is to supply options to the gallery constructor in an 
+simple-gallery options can be supplied to the plugin in one of two ways.  The easiest way to do so is to supply options to the gallery constructor in an 
 object parameter when the function is run like so:
 
 ```javascript
