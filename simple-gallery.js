@@ -42,7 +42,7 @@
         // reset DOM to state before gallery was invoked
         _destroy: function() {
             this.element.css({
-                "background-repeat": "nrepeat",
+                "background-repeat": "repeat",
                 "background-position": "0% 0%",
                 "opacity": 1
             });
