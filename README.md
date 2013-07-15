@@ -1,6 +1,6 @@
 # jQuery simple-gallery #
 
-**simple-gallery.js** is a lightweight jQuery plugin that makes it quick and 
+**simple-gallery.js** is a lightweight jQuery widget that makes it quick and 
 easy to implement highly customizable photo galleries on your website.  The 
 idea behind the project was to separate the work of creating a cycling 
 slideshow animation from the gallery's design process, allowing for greater 
@@ -8,22 +8,30 @@ facility of code-reuse and fewer headaches.  simple-gallery.js creates a
 slideshow you can easily customize without having to worry about superfluous 
 code and unneeded options.
 
-**CURRENT VERSION: v1.3.0**
+**CURRENT VERSION: v2.0.0**
 
 ## Get Started ##
 
 First thing's first!  To get started with simple-gallery.js, download the 
-plugin and include it after you've included jQuery:
+plugin and include it after you've included both jQuery and jQuery UI:
 
 ```html
 <script src="/path/to/jquery.min.js"></script>
+<script src="/path/to/jquery-ui.min.js"></script>
 <script src="/path/to/simple-gallery.min.js"></script>
 ```
 
+Note that the only required element of jQuery UI is the **widget** portion 
+of the UI core.  Feel free to do a custom download if you would not like to 
+include the full jQuery UI package.  I have also included a minified version 
+of the required jQuery UI code in this repository so you can download that 
+and not have to worry about going through the jQuery site.
+
 The most basic usage of the simple-gallery.js plugin requires using a standard 
-jQuery selector to isolate the images to add to the gallery, and supplying a 
-target HTML tag in which to display the larger, selected image.  In other 
-words, the simple-gallery plugin expects something like the following:
+jQuery selector to choose the target HTML tag in which to display the larger, 
+selected image and supplying another selector to isolate the source images for 
+the gallery.   In other words, the simple-gallery plugin expects something 
+like the following:
 
 ```html
 <div id="thumbnails">
@@ -52,7 +60,7 @@ gallery using the following JavaScript code - which should seem familiar as it
 works similarly to other jQuery functions:
 
 ```javascript
-$('#thumbnails img').gallery({target: "#displayImage"});
+$('#displayImage').gallery({source: "#thumbnails img"});
 ```
 
 The selector `$('#thumbnails img')` isolates the set of images that you would 
@@ -68,11 +76,10 @@ ways to customize the plugin.
 The complete set of options that can be passed upon photo gallery 
 initialization is listed below:
 
-+ `target` (mandatory, *no default*) - a string representing the selector for 
-the tag to display each image as it is selected in the gallery.  The string 
-does not need to be an id, as long as the selector `$(target)` will only 
-select one appropriately sized DOM element from the page to cycle your images 
-through.
++ `source` (mandatory, *no default*) - a string representing the selector for 
+the source images used in the photo gallery.  The string supplied can be 
+anything, so long as the selector `$(source)` will isolate all `<img>` tags 
+to be displayed in the gallery.
 
 + `animate` (optional, *default = true*) - a boolean true/false value 
 representing whether to animate the slideshow.  If false, the target display 
@@ -104,46 +111,70 @@ thumbnail for the image that is currently being shown in the gallery.
 
 ### Using Options ###
 
-Simple-Gallery options can be supplied to the plugin in one of two ways upon 
-initialization.  The easiest way to do so is to supply options in an object 
-parameter when the function is run like so:
+Simple-Gallery options can be supplied to the plugin in one of two ways.  The easiest way to do so is to supply options to the gallery constructor in an 
+object parameter when the function is run like so:
 
 ```javascript
-$('#thumbnails img').gallery({target: "#displayImage", easing: "linear", restartOnEnd: false});
+$('#displayImage').gallery({source: "#thumbnails img", easing: "linear", restartOnEnd: false});
 ```
 
-If you are planning on reusing the same gallery settings multiple times, or 
-would like to override the defaults instead of passing your customizations in 
-when you call the function you can do so as well:
+If you would like to change the options of a gallery instance after it has 
+been instantiated, you can do so as well:
 
 ```javascript
-$.fn.gallery.defaults.target = "#displayImage";
-$.fn.gallery.defaults.easing = "linear";
-$.fn.gallery.defaults.restartOnEnd = true;
-$('#thumbnails img').gallery();
+// create gallery
+$('#displayImage').gallery({source: "#thumbnails img"});
+
+// get current values of options
+alert($('#displayImage').gallery('option', 'easing'));     // prints "swing"
+alert($('#displayImage').gallery('option', 'changeTime')); // prints "700"
+
+// set new values of options
+$('#displayImage').gallery('option', 'easing', 'linear');
+$('#displayImage').gallery('option', 'changeTime', 600);
 ```
 
-## Advanced Use - Further Customization ##
+## Advanced Use ##
 
 If the options provided are not enough to obtain the look you would like to 
-achieve, three of the core functions that make up the simple-gallery plugin 
-are declared public and can be completely overridden:
+achieve, simple-gallery comes loaded with extra functionality that may be 
+able to help.
 
-+ `$.fn.gallery.init` - called once to initialize plugin.  Default behavior 
-sets the target image's background properties and begins the opacity at 0 so 
-it can fade in.
+### Public Functions
 
-+ `$.fn.gallery.startTransition` - called when an image should transition out of 
-being displayed.  Default behavior fades the current image out using the 
-`changeTime` and `easing` options supplied.
+There are currently two public functions which can be called once the gallery 
+has been instantiated:
 
-+ `$.fn.gallery.endTransition` - called when a new image should be 
-transitioned into the target destination.  Default behavior fades the new 
-image in using the `changeTime` and `easing` options supplied.
++ stopAnimation - stops the display image from switching to the next photo in 
+the gallery.
 
-Overriding any or all of these can drastically change the appearance and 
-animation of the plugin.  The most common reason to override them would be if 
-you wanted a different transition than a fade.
++ resumeAnimation - resumes the gallery's animation after having been stopped.
+
+All public functions are called on the gallery instance of the display image 
+after instantiation as follows:
+
+```javascript
+// create gallery linked to '#displayImage'
+$('#displayImage').gallery({source: "#thumbnails img"});
+
+// stop and then resume gallery animation
+$('#displayImage').gallery("stopAnimation");
+$('#displayImage').gallery("resumeAnimation");
+```
+
+A typical usage would be to stop the gallery from animating when the user 
+hovers their cursor over the targeted display image:
+
+```javascript
+$('#displayImage').on({
+    mouseenter: function() {
+        $('#displayImage').gallery("stopAnimation");
+    },
+    mouseleave: function() {
+        $('#displayImage').gallery("resumeAnimation");
+    }
+});
+```
 
 ## Examples ##
 
