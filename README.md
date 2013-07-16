@@ -58,7 +58,7 @@ can show up.  The plugin works by changing the background-image of the target
 tag, so the tag needs to already occupy the space on the page where you expect 
 the photo to load.
 
-As soon as soon as the DOM for the page has loaded, you can initialize the 
+As soon as the DOM for the page has loaded, you can initialize the 
 gallery using the following JavaScript code - which should seem familiar as it 
 works similarly to other jQuery functions:
 
