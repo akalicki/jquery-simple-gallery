@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v2.0.0
+ * simple-gallery.js - v2.0.1
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
