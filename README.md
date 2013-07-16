@@ -129,8 +129,8 @@ been instantiated, you can do so as well:
 $('#displayImage').gallery({source: "#thumbnails img"});
 
 // get current values of options
-alert($('#displayImage').gallery('option', 'easing'));     // prints "swing"
-alert($('#displayImage').gallery('option', 'changeTime')); // prints "700"
+$('#displayImage').gallery('option', 'easing');     // "swing"
+$('#displayImage').gallery('option', 'changeTime'); // "700"
 
 // set new values of options
 $('#displayImage').gallery('option', 'easing', 'linear');
