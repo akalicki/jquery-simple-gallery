@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v2.0.1
+ * simple-gallery.js - v2.1.0
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
@@ -35,6 +35,12 @@
                 "background-position": "center",
                 "opacity": 0
             });
+            this.images.css("opacity", 0);
+            this.images.animate(
+                {"opacity": 1}, 
+                this.options.changeTime, 
+                this.options.easing
+            );
             this.images.on('click.gallery', $.proxy(this._onClick, this));
             this._loadNext();
         },
