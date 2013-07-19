@@ -8,7 +8,7 @@ facility of code-reuse and fewer headaches.  simple-gallery.js creates a
 slideshow you can easily customize without having to worry about superfluous 
 code and unneeded options.
 
-**CURRENT VERSION: v2.1.0**
+**CURRENT VERSION: v2.3.0**
 
 ## Get Started ##
 
@@ -111,6 +111,15 @@ reaching the end of the collection.
 added and removed from each thumbnail image in turn when it is displayed in 
 the target destination.  This allows you to further customize the look of the 
 thumbnail for the image that is currently being shown in the gallery.
+
++ `showCaptions` (optional, *default = false*) - a boolean true/false value 
+representing whether to show each image's `title` attribute in the area given 
+by the selector `captionTarget`.
+
++ `captionTarget` (optional, *default = ""*) - a string representing the 
+selector for an area to show the `title` attribute of each image as it is 
+selected.  Setting the `captionTarget` string will only have an effect if 
+`showCaptions` is set to `true`.
 
 ### Using Options ###
 

@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v2.1.0
+ * simple-gallery.js - v2.3.0
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
@@ -21,7 +21,9 @@
             changeTime: 700,
             easing: "swing",
             restartOnEnd: true,
-            selectClass: "selected"
+            selectClass: "selected",
+            showCaptions: false,
+            captionTarget: ""
         },
         
         // setup gallery widget
@@ -36,6 +38,7 @@
                 "opacity": 0
             });
             this.images.css("opacity", 0);
+            
             this.images.animate(
                 {"opacity": 1}, 
                 this.options.changeTime, 
@@ -100,6 +103,11 @@
             $("." + this.options.selectClass).removeClass(this.options.selectClass);
             selected.className += this.options.selectClass;
             this.nextImg = index + 1;
+            
+            if (this.options.showCaptions) {
+                var caption = selected.title;
+                $(this.options.captionTarget).html(caption);
+            }
         },
         
         // perform transition to remove current image from target
@@ -109,6 +117,14 @@
                 this.options.changeTime, 
                 this.options.easing
             );
+            
+            if (this.options.showCaptions) {
+                $(this.options.captionTarget).animate(
+                    {"opacity": 0},
+                    this.options.changeTime,
+                    this.options.easing
+                );
+            }
         },
         
         // perform transition to add new image to target
@@ -118,6 +134,14 @@
                 this.options.changeTime, 
                 this.options.easing
             );
+            
+            if (this.options.showCaptions) {
+                $(this.options.captionTarget).animate(
+                    {"opacity": 1},
+                    this.options.changeTime,
+                    this.options.easing
+                );
+            }
         },
         
         // reset timer and select image if clicked
