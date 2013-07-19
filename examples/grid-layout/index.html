@@ -4,7 +4,7 @@
     <title>simple-gallery grid-layout example</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="../../jqueryui-widget.min.js"></script>
-    <script src="../../simple-gallery.min.js"></script>
+    <script src="../../simple-gallery.js"></script>
     <style>
         #images {
             float:left;
@@ -25,36 +25,43 @@
         .selected {
             background-color:gray;
         }
+        
+        #caption {
+            clear:left;
+        }
     </style>
 </head>
 <body>
     <div id="images">
         <div class="row">
-            <img src="../images/img1.jpg" />
-            <img src="../images/img2.jpg" />
-            <img src="../images/img3.jpg" />
+            <img src="../images/img1.jpg" title="image 1" />
+            <img src="../images/img2.jpg" title="image 2" />
+            <img src="../images/img3.jpg" title="image 3" />
         </div>
         <div class="row">
-            <img src="../images/img4.jpg" />
-            <img src="../images/img5.jpg" />
-            <img src="../images/img6.jpg" />
+            <img src="../images/img4.jpg" title="image 4" />
+            <img src="../images/img5.jpg" title="image 5" />
+            <img src="../images/img6.jpg" title="image 6" />
         </div>
         <div class="row">
-            <img src="../images/img7.jpg" />
-            <img src="../images/img8.jpg" />
-            <img src="../images/img9.jpg" />
+            <img src="../images/img7.jpg" title="image 7" />
+            <img src="../images/img8.jpg" title="image 8" />
+            <img src="../images/img9.jpg" title="image 9" />
         </div>
     </div>
     <div id="full">
     </div>
+    <p id="caption"></p>
     
     <script>
-        $('#full').gallery({source: "#images img",
-                                  startImg: 3,
-                                  easing: "linear",
-                                  waitTime: 1000,
-                                  changeTime: 300
-                            });
+        $('#full').gallery({
+            source: "#images img",
+            easing: "linear",
+            waitTime: 2000,
+            changeTime: 400,
+            showCaptions: true,
+            captionTarget: "#caption"
+        });
         $("#full").on({
             mouseenter: function() {
                 $("#full").gallery("stopAnimation");
