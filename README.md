@@ -205,3 +205,7 @@ submit a contribution, please follow standard git procedure:
 1. [Fork](https://github.com/akalicki/jquery-simple-gallery/fork) the project
 2. Make changes and push the commits to your own repository
 3. Submit a pull request and I'll get back to you!
+
+## License ##
+
+This project is released under the MIT License.  Read more [here](https://github.com/akalicki/jquery-simple-gallery/blob/master/LICENSE.txt).

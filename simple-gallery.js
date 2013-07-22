@@ -5,8 +5,8 @@
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
  * highly customizable photo galleries using standard jQuery notation.
  *
- * All work contained in this file is licensed under a Creative Commons Attribution 3.0
- * Unported License.  Please contact the copyright holder with further questions.
+ * All work contained in this file is released under the MIT License.
+ * Please contact the copyright holder with further questions.
 */
 ;(function ($, window, document, undefined) {
 
