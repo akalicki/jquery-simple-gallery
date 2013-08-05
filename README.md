@@ -193,8 +193,14 @@ $('#displayImage').on({
 A few examples of simple ways to implement this plugin:
 
 + [Grid-layout example](https://github.com/akalicki/jquery-simple-gallery/blob/master/examples/grid-layout/index.html)
-
 + [Row-layout example](https://github.com/akalicki/jquery-simple-gallery/blob/master/examples/row-layout/index.html)
+
+## Demos ##
+
+Want to see simple-gallery.js in action?  Check out some sites that currently use it!  Send me a link to your implementation and I'll be happy to add it to the list.
+
++ [Columbia University Engineers Without Borders](http://morocco.cuewb.org/#bridge)
++ [Centro de Día Geriátrico](http://cdg.com.py/fotos.php)
 
 ## Contribute ##
 
@@ -203,7 +209,7 @@ done I will definitely include your changes in the official version.  To
 submit a contribution, please follow standard git procedure:
 
 1. [Fork](https://github.com/akalicki/jquery-simple-gallery/fork) the project
-2. Make changes and push the commits to your own repository
+2. Make changes and push the commits to a topic branch in your own repository
 3. Submit a pull request and I'll get back to you!
 
 ## License ##
