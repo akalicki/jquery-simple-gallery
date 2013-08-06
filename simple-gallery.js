@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v2.3.1
+ * simple-gallery.js - v2.4.0
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
@@ -30,7 +30,6 @@
         _create: function() {
             this.images = $(this.options.source);
             this.nextImg = this.options.startImg;
-            this.cycle;
             
             this.element.css({
                 "background-repeat": "no-repeat",
@@ -97,6 +96,8 @@
         
         // select a new image to be placed in target
         _selectImg: function(index) {
+            this._trigger('imageload');
+            
             var selected = this.images.get(index);
             var url = selected.src;
             this.element.css("background-image", "url(" + url + ")");
@@ -146,6 +147,8 @@
         
         // reset timer and select image if clicked
         _onClick: function(event) {
+            this._trigger('click');
+            
             window.clearTimeout(this.cycle);
             this.element.stop(true);
             this.nextImg = this.images.index($(event.target));
@@ -154,6 +157,8 @@
         
         // stop photos from switching
         stopAnimation: function() {
+            this._trigger('animationstop');
+            
             this.options.animate = false;
             window.clearTimeout(this.cycle);
             this.element.stop(true);
@@ -166,6 +171,8 @@
         // resume photo switching
         resumeAnimation: function() {
             var self = this;
+            self._trigger('animationresume');
+            
             self.options.animate = true;
             self.cycle = window.setTimeout(function() {
                 self._loadNext();

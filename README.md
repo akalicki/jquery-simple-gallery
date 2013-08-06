@@ -8,7 +8,7 @@ facility of code-reuse and fewer headaches.  simple-gallery.js creates a
 slideshow you can easily customize without having to worry about superfluous 
 code and unneeded options.
 
-**CURRENT VERSION: v2.3.1**
+**CURRENT VERSION: v2.4.0**
 
 ## Get Started ##
 
@@ -48,8 +48,7 @@ like the following:
     <img src="../images/img8.jpg" />
     <img src="../images/img9.jpg" />
 </div>
-<div id="displayImage">
-</div>
+<div id="displayImage"></div>
 ```
 
 The area you decide to display your photos (the `<div>` with id `displayImage` 
@@ -134,7 +133,7 @@ If you would like to change the options of a gallery instance after it has
 been instantiated, you can do so as well:
 
 ```javascript
-// create gallery
+// create gallery linked to '#displayImage'
 $('#displayImage').gallery({source: "#thumbnails img"});
 
 // get current values of options
@@ -152,15 +151,15 @@ If the options provided are not enough to obtain the look you would like to
 achieve, simple-gallery comes loaded with extra functionality that may be 
 able to help.
 
-### Public Functions
+### Public Functions ###
 
 There are currently two public functions which can be called once the gallery 
 has been instantiated:
 
-+ stopAnimation - stops the display image from switching to the next photo in 
++ `stopAnimation` - stops the display image from switching to the next photo in 
 the gallery.
 
-+ resumeAnimation - resumes the gallery's animation after having been stopped.
++ `resumeAnimation` - resumes the gallery's animation after having been stopped.
 
 All public functions are called on the gallery instance of the display image 
 after instantiation as follows:
@@ -184,6 +183,46 @@ $('#displayImage').on({
     },
     mouseleave: function() {
         $('#displayImage').gallery("resumeAnimation");
+    }
+});
+```
+
+### Event Binding ###
+
+simple-gallery.js triggers the following custom events while in use:
+
++ `galleryimageload` - triggered when a new picture is loaded into the target 
+display image.
+
++ `galleryclick` - triggered when one of the source thumbnail images is 
+clicked.
+
++ `galleryanimationstop` - triggered when the gallery's `stopAnimation` 
+method is called.
+
++ `galleryanimationresume` - triggered when the gallery's `resumeAnimation` 
+method is called.
+
+Handler functions can be bound to the gallery's events after instantiation 
+like so:
+
+```javascript
+// create gallery linked to '#displayImage'
+$('#displayImage').gallery({source: "#thumbnails img"});
+
+// attach handler functions to gallery events
+$("#displayImage").on({
+    galleryimageload: function() {
+        console.log("new image loaded");
+    },
+    galleryclick: function() {
+        console.log("gallery source image clicked");
+    },
+    galleryanimationstop: function() {
+        console.log("gallery animation stopped");
+    },
+    galleryanimationresume: function() {
+        console.log("gallery animation resumed");
     }
 });
 ```

@@ -49,8 +49,7 @@
             <img src="../images/img9.jpg" title="image 9" />
         </div>
     </div>
-    <div id="full">
-    </div>
+    <div id="full"></div>
     <p id="caption"></p>
     
     <script>
@@ -62,12 +61,28 @@
             showCaptions: true,
             captionTarget: "#caption"
         });
+        
         $("#full").on({
             mouseenter: function() {
                 $("#full").gallery("stopAnimation");
             },
             mouseleave: function() {
                 $("#full").gallery("resumeAnimation");
+            }
+        });
+        
+        $("#full").on({
+            galleryimageload: function() {
+                console.log("new image loaded");
+            },
+            galleryclick: function() {
+                console.log("gallery source image clicked");
+            },
+            galleryanimationstop: function() {
+                console.log("gallery animation stopped");
+            },
+            galleryanimationresume: function() {
+                console.log("gallery animation resumed");
             }
         });
     </script>

@@ -30,25 +30,57 @@
             width:250px;
             padding:0 5px;
         }
+        
+        #caption {
+            clear:left;
+        }
     </style>
 </head>
 <body>
     <div id="images">
-        <img src="../images/img1.jpg" />
-        <img src="../images/img2.jpg" />
-        <img src="../images/img3.jpg" />
-        <img src="../images/img4.jpg" />
-        <img src="../images/img5.jpg" />
-        <img src="../images/img6.jpg" />
-        <img src="../images/img7.jpg" />
-        <img src="../images/img8.jpg" />
-        <img src="../images/img9.jpg" />
+        <img src="../images/img1.jpg" title="image 1" />
+        <img src="../images/img2.jpg" title="image 2" />
+        <img src="../images/img3.jpg" title="image 3" />
+        <img src="../images/img1.jpg" title="image 4" />
+        <img src="../images/img2.jpg" title="image 5" />
+        <img src="../images/img3.jpg" title="image 6" />
+        <img src="../images/img1.jpg" title="image 7" />
+        <img src="../images/img2.jpg" title="image 8" />
+        <img src="../images/img3.jpg" title="image 9" />
     </div>
-    <div id="full">
-    </div>
+    <div id="full"></div>
+    <p id="caption"></p>
     
     <script>
-        $('#full').gallery({source: "#images img"});
+        $('#full').gallery({
+            source: "#images img",
+            showCaptions: true,
+            captionTarget: "#caption"
+        });
+        
+        $("#full").on({
+            mouseenter: function() {
+                $("#full").gallery("stopAnimation");
+            },
+            mouseleave: function() {
+                $("#full").gallery("resumeAnimation");
+            }
+        });
+        
+        $("#full").on({
+            galleryimageload: function() {
+                console.log("new image loaded");
+            },
+            galleryclick: function() {
+                console.log("gallery source image clicked");
+            },
+            galleryanimationstop: function() {
+                console.log("gallery animation stopped");
+            },
+            galleryanimationresume: function() {
+                console.log("gallery animation resumed");
+            }
+        });
     </script>
 </body>
 </html>
