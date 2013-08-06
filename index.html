@@ -7,6 +7,12 @@
     <meta name="description" content="simple-gallery.js : A lightweight jQuery extension for quickly creating highly customizable photo galleries." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/gallery.css">
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascripts/jqueryui-widget.min.js"></script>
+    <script src="javascripts/simple-gallery.min.js"></script>
+    <script src="javascripts/main.js"></script>
 
     <title>simple-gallery.js</title>
   </head>
@@ -30,9 +36,35 @@
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
+    
+    <div class="section-photos">
+        <div class="thumbnails">
+            <div class="thumbnail-row">
+                <img src="images/bridge/b1.jpg" title="Workers mixing and pouring the concrete needed for foundations and towers." />
+                <img src="images/bridge/b2.jpg" title="Bridge cables in the process of being lowered and spliced." />
+            </div>
+            <div class="thumbnail-row">
+                 <img src="images/bridge/b3.jpg" title='Tensioning the cables using a "block and tackle" pulley system.' />
+                <img src="images/bridge/b4.jpg" title='The improvised "traveler" we used to allow access to the underside of the decking.' />
+            </div>
+            <div class="thumbnail-row">
+                <img src="images/bridge/b5.jpg" title="A decking simulation performed during the winter 2013 assessment trip." />
+                <img src="images/bridge/b6.jpg" title="Safety was our primary concern throughout the project." />
+            </div>
+            <div class="thumbnail-row">
+                <img src="images/bridge/b7.jpg" title="The netting we applied to the sides of the bridge is more than strong enough to stop a person's fall." />
+                <img src="images/bridge/b8.jpg" title="The workers from Ait Bayoud were the first ones to cross the bridge they helped to build." />
+            </div>
+            <div class="thumbnail-row">
+                <img src="images/bridge/b9.jpg" title="The community of Ait Bayoud threw a festive celebration full of music, food, and dancing to celebrate the opening of the bridge." />
+                <img src="images/bridge/b10.jpg" title="The completed 210ft bridge will make crossing the river below exponentially easier during the rainy season and facilitate access to primary education and medical care." />
+            </div>
+        </div>
+        <div class="display-image"></div>
+    </div>
+    
       <section id="main_content" class="inner">
-        <h1>
-<a name="simple-galleryjs" class="anchor" href="#simple-galleryjs"><span class="octicon octicon-link"></span></a>simple-gallery.js</h1>
+        
 
 <p><strong>simple-gallery.js</strong> is a lightweight jQuery widget that makes it quick and 
 easy to implement highly customizable photo galleries on your website.  The 
