@@ -8,6 +8,10 @@ facility of code-reuse and fewer headaches.  simple-gallery.js creates a
 slideshow you can easily customize without having to worry about superfluous 
 code and unneeded options.
 
+[***Check out a working demo and nicer looking README on our github.io page!***][demo]
+
+[demo]: http://akalicki.github.io/jquery-simple-gallery/
+
 **CURRENT VERSION: v2.4.0**
 
 ## Get Started ##
