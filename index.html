@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="simple-gallery.js : A lightweight jQuery extension for quickly creating highly customizable photo galleries." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>simple-gallery.js</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/akalicki/jquery-simple-gallery">View on GitHub</a>
+
+          <h1 id="project_title">simple-gallery.js</h1>
+          <h2 id="project_tagline">A lightweight jQuery extension for quickly creating highly customizable photo galleries.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/akalicki/jquery-simple-gallery/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/akalicki/jquery-simple-gallery/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="simple-galleryjs" class="anchor" href="#simple-galleryjs"><span class="octicon octicon-link"></span></a>simple-gallery.js</h1>
+
+<p><strong>simple-gallery.js</strong> is a lightweight jQuery widget that makes it quick and 
+easy to implement highly customizable photo galleries on your website.  The 
+idea behind the project was to separate the work of creating a cycling 
+slideshow animation from the gallery's design process, allowing for greater 
+facility of code-reuse and fewer headaches.  simple-gallery.js creates a 
+slideshow you can easily customize without having to worry about superfluous 
+code and unneeded options.</p>
+
+<p><strong>CURRENT VERSION: v2.4.0</strong></p>
+
+<h2>
+<a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>Get Started</h2>
+
+<p>First thing's first!  To get started with simple-gallery.js, download the 
+plugin and include it after you've included both jQuery and jQuery UI:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/path/to/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/path/to/jquery-ui.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/path/to/simple-gallery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>Note that the only required element of jQuery UI is the <strong>widget</strong> portion 
+of the UI core.  Feel free to do a custom download if you would not like to 
+include the full jQuery UI package.  I have also included a 
+<a href="https://github.com/akalicki/jquery-simple-gallery/blob/master/jqueryui-widget.min.js">minified version</a> of the required jQuery UI code in this 
+repository so you can download that and not have to worry about going through 
+the jQuery site.</p>
+
+<p>The most basic usage of the simple-gallery.js plugin requires using a standard 
+jQuery selector to choose the target HTML tag in which to display the larger, 
+selected image and supplying another selector to isolate the source images for 
+the gallery.   In other words, the simple-gallery plugin expects something 
+like the following:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"thumbnails"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img1.jpg"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img2.jpg"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img3.jpg"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img4.jpg"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img5.jpg"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img6.jpg"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img7.jpg"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img8.jpg"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"../images/img9.jpg"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"displayImage"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+
+<p>The area you decide to display your photos (the <code>&lt;div&gt;</code> with id <code>displayImage</code> 
+in this case) should be styled with appropriate width and height so that they 
+can show up.  The plugin works by changing the background-image of the target 
+tag, so the tag needs to already occupy the space on the page where you expect 
+the photo to load.</p>
+
+<p>As soon as the DOM for the page has loaded, you can initialize the 
+gallery using the following JavaScript code - which should seem familiar as it 
+works similarly to other jQuery functions:</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">({</span><span class="nx">source</span><span class="o">:</span> <span class="s2">"#thumbnails img"</span><span class="p">});</span>
+</pre></div>
+
+<p>The selector <code>$('#thumbnails img')</code> isolates the set of images that you would 
+like to turn into a gallery.  They can be separated from the rest of the 
+document in one <code>&lt;div&gt;</code> as shown above or scattered throughout - the only 
+thing that matters is that your selector only chooses <code>&lt;img&gt;</code> tags with valid 
+<code>src</code> attributes that point to their corresponding images.  The parameter 
+passed to the <code>gallery</code> function is an options object specifying different 
+ways to customize the plugin.</p>
+
+<h2>
+<a name="gallery-options" class="anchor" href="#gallery-options"><span class="octicon octicon-link"></span></a>Gallery Options</h2>
+
+<p>The complete set of options that can be passed upon photo gallery 
+initialization is listed below:</p>
+
+<ul>
+<li><p><code>source</code> (mandatory, <em>no default</em>) - a string representing the selector for 
+the source images used in the photo gallery.  The string supplied can be 
+anything, so long as the selector <code>$(source)</code> will isolate all <code>&lt;img&gt;</code> tags 
+to be displayed in the gallery.</p></li>
+<li><p><code>animate</code> (optional, <em>default = true</em>) - a boolean true/false value 
+representing whether to animate the slideshow.  If false, the target display 
+will only change images when you click on a thumbnail image.</p></li>
+<li><p><code>startImg</code> (optional, <em>default = 0</em>) - the zero-based index of the image to 
+start the slideshow at.  A default value of 0 will tell the plugin to start at 
+the first image in the selection.</p></li>
+<li><p><code>waitTime</code> (optional, <em>default = 5000</em>) - the time, in milliseconds, to show 
+each image before beginning the transition to the next one.</p></li>
+<li><p><code>changeTime</code> (optional, <em>default = 700</em>) - the time, in milliseconds, to 
+take for each slideshow animation.  A full photo-change takes <code>2 * changeTime</code> 
+milliseconds (in the default behavior, <code>changeTime</code> milliseconds for fading 
+out an old image and another <code>changeTime</code> for fading in the new one).</p></li>
+<li><p><code>easing</code> (optional, <em>default = "swing"</em>) - the easing function to use for 
+photo transitions.</p></li>
+<li><p><code>restartOnEnd</code> (optional, <em>default = true</em>) - a boolean true/false value 
+representing whether to restart the slideshow from the beginning after 
+reaching the end of the collection.</p></li>
+<li><p><code>selectClass</code> (optional, <em>default = selected</em>) - the class name that gets 
+added and removed from each thumbnail image in turn when it is displayed in 
+the target destination.  This allows you to further customize the look of the 
+thumbnail for the image that is currently being shown in the gallery.</p></li>
+<li><p><code>showCaptions</code> (optional, <em>default = false</em>) - a boolean true/false value 
+representing whether to show each image's <code>title</code> attribute in the area given 
+by the selector <code>captionTarget</code>.</p></li>
+<li><p><code>captionTarget</code> (optional, <em>default = ""</em>) - a string representing the 
+selector for an area to show the <code>title</code> attribute of each image as it is 
+selected.  Setting the <code>captionTarget</code> string will only have an effect if 
+<code>showCaptions</code> is set to <code>true</code>.</p></li>
+</ul><h3>
+<a name="using-options" class="anchor" href="#using-options"><span class="octicon octicon-link"></span></a>Using Options</h3>
+
+<p>simple-gallery options can be supplied to the plugin in one of two ways.  The easiest way to do so is to supply options to the gallery constructor in an 
+object parameter when the function is run like so:</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">({</span><span class="nx">source</span><span class="o">:</span> <span class="s2">"#thumbnails img"</span><span class="p">,</span> <span class="nx">easing</span><span class="o">:</span> <span class="s2">"linear"</span><span class="p">,</span> <span class="nx">restartOnEnd</span><span class="o">:</span> <span class="kc">false</span><span class="p">});</span>
+</pre></div>
+
+<p>If you would like to change the options of a gallery instance after it has 
+been instantiated, you can do so as well:</p>
+
+<div class="highlight"><pre><span class="c1">// create gallery linked to '#displayImage'</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">({</span><span class="nx">source</span><span class="o">:</span> <span class="s2">"#thumbnails img"</span><span class="p">});</span>
+
+<span class="c1">// get current values of options</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">(</span><span class="s1">'option'</span><span class="p">,</span> <span class="s1">'easing'</span><span class="p">);</span>     <span class="c1">// "swing"</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">(</span><span class="s1">'option'</span><span class="p">,</span> <span class="s1">'changeTime'</span><span class="p">);</span> <span class="c1">// "700"</span>
+
+<span class="c1">// set new values of options</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">(</span><span class="s1">'option'</span><span class="p">,</span> <span class="s1">'easing'</span><span class="p">,</span> <span class="s1">'linear'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">(</span><span class="s1">'option'</span><span class="p">,</span> <span class="s1">'changeTime'</span><span class="p">,</span> <span class="mi">600</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="advanced-use" class="anchor" href="#advanced-use"><span class="octicon octicon-link"></span></a>Advanced Use</h2>
+
+<p>If the options provided are not enough to obtain the look you would like to 
+achieve, simple-gallery comes loaded with extra functionality that may be 
+able to help.</p>
+
+<h3>
+<a name="public-functions" class="anchor" href="#public-functions"><span class="octicon octicon-link"></span></a>Public Functions</h3>
+
+<p>There are currently two public functions which can be called once the gallery 
+has been instantiated:</p>
+
+<ul>
+<li><p><code>stopAnimation</code> - stops the display image from switching to the next photo in 
+the gallery.</p></li>
+<li><p><code>resumeAnimation</code> - resumes the gallery's animation after having been stopped.</p></li>
+</ul><p>All public functions are called on the gallery instance of the display image 
+after instantiation as follows:</p>
+
+<div class="highlight"><pre><span class="c1">// create gallery linked to '#displayImage'</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">({</span><span class="nx">source</span><span class="o">:</span> <span class="s2">"#thumbnails img"</span><span class="p">});</span>
+
+<span class="c1">// stop and then resume gallery animation</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">(</span><span class="s2">"stopAnimation"</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">(</span><span class="s2">"resumeAnimation"</span><span class="p">);</span>
+</pre></div>
+
+<p>A typical usage would be to stop the gallery from animating when the user 
+hovers their cursor over the targeted display image:</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">on</span><span class="p">({</span>
+    <span class="nx">mouseenter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">(</span><span class="s2">"stopAnimation"</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">mouseleave</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">(</span><span class="s2">"resumeAnimation"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="event-binding" class="anchor" href="#event-binding"><span class="octicon octicon-link"></span></a>Event Binding</h3>
+
+<p>simple-gallery.js triggers the following custom events while in use:</p>
+
+<ul>
+<li><p><code>galleryimageload</code> - triggered when a new picture is loaded into the target 
+display image.</p></li>
+<li><p><code>galleryclick</code> - triggered when one of the source thumbnail images is 
+clicked.</p></li>
+<li><p><code>galleryanimationstop</code> - triggered when the gallery's <code>stopAnimation</code> 
+method is called.</p></li>
+<li><p><code>galleryanimationresume</code> - triggered when the gallery's <code>resumeAnimation</code> 
+method is called.</p></li>
+</ul><p>Handler functions can be bound to the gallery's events after instantiation 
+like so:</p>
+
+<div class="highlight"><pre><span class="c1">// create gallery linked to '#displayImage'</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#displayImage'</span><span class="p">).</span><span class="nx">gallery</span><span class="p">({</span><span class="nx">source</span><span class="o">:</span> <span class="s2">"#thumbnails img"</span><span class="p">});</span>
+
+<span class="c1">// attach handler functions to gallery events</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"#displayImage"</span><span class="p">).</span><span class="nx">on</span><span class="p">({</span>
+    <span class="nx">galleryimageload</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"new image loaded"</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">galleryclick</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"gallery source image clicked"</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">galleryanimationstop</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"gallery animation stopped"</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">galleryanimationresume</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"gallery animation resumed"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>A few examples of simple ways to implement this plugin:</p>
+
+<ul>
+<li><a href="https://github.com/akalicki/jquery-simple-gallery/blob/master/examples/grid-layout/index.html">Grid-layout example</a></li>
+<li><a href="https://github.com/akalicki/jquery-simple-gallery/blob/master/examples/row-layout/index.html">Row-layout example</a></li>
+</ul><h2>
+<a name="demos" class="anchor" href="#demos"><span class="octicon octicon-link"></span></a>Demos</h2>
+
+<p>Want to see simple-gallery.js in action?  Check out some sites that currently use it!  Send me a link to your implementation and I'll be happy to add it to the list.</p>
+
+<ul>
+<li><a href="http://morocco.cuewb.org/#bridge">Columbia University Engineers Without Borders</a></li>
+<li><a href="http://cdg.com.py/fotos.php">Centro de Día Geriátrico</a></li>
+</ul><h2>
+<a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h2>
+
+<p>Any and all contributions to this project are welcome!  If I like what you've 
+done I will definitely include your changes in the official version.  To 
+submit a contribution, please follow standard git procedure:</p>
+
+<ol>
+<li>
+<a href="https://github.com/akalicki/jquery-simple-gallery/fork">Fork</a> the project</li>
+<li>Make changes and push the commits to a topic branch in your own repository</li>
+<li>Submit a pull request and I'll get back to you!</li>
+</ol><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This project is released under the MIT License.  Read more <a href="https://github.com/akalicki/jquery-simple-gallery/blob/master/LICENSE.txt">here</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">simple-gallery.js maintained by <a href="https://github.com/akalicki">akalicki</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
