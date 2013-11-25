@@ -66,7 +66,7 @@ gallery using the following JavaScript code - which should seem familiar as it
 works similarly to other jQuery functions:
 
 ```javascript
-$('#displayImage').gallery({source: "#thumbnails img"});
+$('#displayImage').gallery({source: '#thumbnails img'});
 ```
 
 The selector `$('#thumbnails img')` isolates the set of images that you would 
@@ -131,7 +131,7 @@ simple-gallery options can be supplied to the plugin in one of two ways.  The ea
 object parameter when the function is run like so:
 
 ```javascript
-$('#displayImage').gallery({source: "#thumbnails img", easing: "linear", restartOnEnd: false});
+$('#displayImage').gallery({source: '#thumbnails img', easing: 'linear', restartOnEnd: false});
 ```
 
 If you would like to change the options of a gallery instance after it has 
@@ -139,7 +139,7 @@ been instantiated, you can do so as well:
 
 ```javascript
 // create gallery linked to '#displayImage'
-$('#displayImage').gallery({source: "#thumbnails img"});
+$('#displayImage').gallery({source: '#thumbnails img'});
 
 // get current values of options
 $('#displayImage').gallery('option', 'easing');     // "swing"
@@ -148,7 +148,7 @@ $('#displayImage').gallery('option', 'changeTime'); // "700"
 // set new values of options
 $('#displayImage').gallery('option', 'easing', 'linear');
 $('#displayImage').gallery('option', 'changeTime', 600);
-$('#displayImage').gallery('source', '#new-thumbnails img');
+$('#displayImage').gallery('option', 'source', '#new-thumbnails img');
 ```
 
 ## Advanced Use ##
@@ -175,12 +175,12 @@ after instantiation as follows:
 
 ```javascript
 // create gallery linked to '#displayImage'
-$('#displayImage').gallery({source: "#thumbnails img"});
+$('#displayImage').gallery({source: '#thumbnails img'});
 
 // stop and then resume animation, then destroy gallery
-$('#displayImage').gallery("stopAnimation");
-$('#displayImage').gallery("resumeAnimation");
-$('#displayImage').gallery("destroy");
+$('#displayImage').gallery('stopAnimation');
+$('#displayImage').gallery('resumeAnimation');
+$('#displayImage').gallery('destroy');
 ```
 
 A typical usage would be to stop the gallery from animating when the user 
@@ -189,10 +189,10 @@ hovers their cursor over the targeted display image:
 ```javascript
 $('#displayImage').on({
     mouseenter: function() {
-        $('#displayImage').gallery("stopAnimation");
+        $('#displayImage').gallery('stopAnimation');
     },
     mouseleave: function() {
-        $('#displayImage').gallery("resumeAnimation");
+        $('#displayImage').gallery('resumeAnimation');
     }
 });
 ```
@@ -223,21 +223,21 @@ like so:
 
 ```javascript
 // create gallery linked to '#displayImage'
-$('#displayImage').gallery({source: "#thumbnails img"});
+$('#displayImage').gallery({source: '#thumbnails img'});
 
 // attach handler functions to gallery events
-$("#displayImage").on({
+$('#displayImage').on({
     galleryimageload: function() {
-        console.log("new image loaded");
+        console.log('new image loaded');
     },
     galleryclick: function() {
-        console.log("gallery source image clicked");
+        console.log('gallery source image clicked');
     },
     galleryanimationstop: function() {
-        console.log("gallery animation stopped");
+        console.log('gallery animation stopped');
     },
     galleryanimationresume: function() {
-        console.log("gallery animation resumed");
+        console.log('gallery animation resumed');
     }
 });
 ```
