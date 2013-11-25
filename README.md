@@ -12,7 +12,7 @@ code and unneeded options.
 
 [demo]: http://akalicki.github.io/jquery-simple-gallery/
 
-**CURRENT VERSION: v2.4.0**
+**CURRENT VERSION: v2.5.0**
 
 ## Get Started ##
 
@@ -85,7 +85,8 @@ initialization is listed below:
 + `source` (mandatory, *no default*) - a string representing the selector for 
 the source images used in the photo gallery.  The string supplied can be 
 anything, so long as the selector `$(source)` will isolate all `<img>` tags 
-to be displayed in the gallery.
+to be displayed in the gallery. A gallery's source collection can be also be 
+dynamically changed after instantiation.
 
 + `animate` (optional, *default = true*) - a boolean true/false value 
 representing whether to animate the slideshow.  If false, the target display 
@@ -147,6 +148,7 @@ $('#displayImage').gallery('option', 'changeTime'); // "700"
 // set new values of options
 $('#displayImage').gallery('option', 'easing', 'linear');
 $('#displayImage').gallery('option', 'changeTime', 600);
+$('#displayImage').gallery('source', '#new-thumbnails img');
 ```
 
 ## Advanced Use ##
@@ -165,6 +167,9 @@ the gallery.
 
 + `resumeAnimation` - resumes the gallery's animation after having been stopped.
 
++ `destroy` - destroys the gallery: removes the class added to the selected 
+thumbnail, fades out the target image, and stops the gallery from cycling.
+
 All public functions are called on the gallery instance of the display image 
 after instantiation as follows:
 
@@ -172,9 +177,10 @@ after instantiation as follows:
 // create gallery linked to '#displayImage'
 $('#displayImage').gallery({source: "#thumbnails img"});
 
-// stop and then resume gallery animation
+// stop and then resume animation, then destroy gallery
 $('#displayImage').gallery("stopAnimation");
 $('#displayImage').gallery("resumeAnimation");
+$('#displayImage').gallery("destroy");
 ```
 
 A typical usage would be to stop the gallery from animating when the user 
@@ -206,6 +212,11 @@ method is called.
 
 + `galleryanimationresume` - triggered when the gallery's `resumeAnimation` 
 method is called.
+
++ `galleryoptionchange` - triggered when one of the gallery's options is 
+changed after instantiation.
+
++ `gallerydestroy` - triggered when the gallery's `destroy` method is called.
 
 Handler functions can be bound to the gallery's events after instantiation 
 like so:
@@ -240,7 +251,9 @@ A few examples of simple ways to implement this plugin:
 
 ## Demos ##
 
-Want to see simple-gallery.js in action?  Check out some sites that currently use it!  Send me a link to your implementation and I'll be happy to add it to the list.
+Want to see simple-gallery.js in action?  Check out some sites that currently 
+use it!  Send me a link to your implementation and I'll be happy to add it to 
+the list.
 
 + [Columbia University Engineers Without Borders](http://morocco.cuewb.org/#bridge)
 + [Centro de Día Geriátrico](http://cdg.com.py/fotos.php)

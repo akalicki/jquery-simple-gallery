@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v2.4.0
+ * simple-gallery.js - v2.5.0
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
@@ -36,31 +36,52 @@
                 "background-position": "center",
                 "opacity": 0
             });
-            this.images.css("opacity", 0);
-            
-            this.images.animate(
-                {"opacity": 1}, 
-                this.options.changeTime, 
-                this.options.easing
-            );
+
             this.images.on('click.gallery', $.proxy(this._onClick, this));
             this._loadNext();
         },
         
         // reset DOM to state before gallery was invoked
         _destroy: function() {
-            this.element.css({
-                "background-repeat": "repeat",
-                "background-position": "0% 0%",
-                "opacity": 1
-            });
+            this._trigger("destroy");
             this.images.off('click.gallery');
+            $("." + this.options.selectClass).removeClass(this.options.selectClass);
+            
+            window.clearTimeout(this.cycle);
+            this.element.stop(true);
+            if (this.options.showCaptions) {
+                $(this.options.captionTarget).stop(true);
+            }
+            
+            this._startTransition();
+            var self = this;
+            this.element.queue(function(next) {
+                self.element.css({
+                    "background-repeat": "repeat",
+                    "background-position": "0% 0%",
+                    "background-image": "none",
+                    "opacity": 1
+                });
+                next();
+            });
+
             this._super();
         },
         
         // allow setting of options during/after construction
         _setOption: function(key, value) {
+            this._trigger('optionchange');
             this.options[key] = value;
+            
+            if (key === "source") {
+                this._trigger('sourcechange');
+                window.clearTimeout(this.cycle);
+                this.images.off('click.gallery');
+                this.images = $(this.options.source);
+                this.images.on('click.gallery', $.proxy(this._onClick, this));
+                this.nextImg = this.options.startImg;
+                this._changeToImg(this.nextImg);
+            }
         },
         
         // load the next image in cycle
