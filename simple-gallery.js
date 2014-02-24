@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v2.5.0
+ * simple-gallery.js - v2.5.1
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
@@ -45,7 +45,7 @@
         _destroy: function() {
             this._trigger("destroy");
             this.images.off('click.gallery');
-            $("." + this.options.selectClass).removeClass(this.options.selectClass);
+            this.images.removeClass(this.options.selectClass);
             
             window.clearTimeout(this.cycle);
             this.element.stop(true);
@@ -122,7 +122,7 @@
             var selected = this.images.get(index);
             var url = selected.src;
             this.element.css("background-image", "url(" + url + ")");
-            $("." + this.options.selectClass).removeClass(this.options.selectClass);
+            this.images.removeClass(this.options.selectClass);
             selected.className += this.options.selectClass;
             this.nextImg = index + 1;
             

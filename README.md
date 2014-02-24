@@ -12,7 +12,7 @@ code and unneeded options.
 
 [demo]: http://akalicki.github.io/jquery-simple-gallery/
 
-**CURRENT VERSION: v2.5.0**
+**CURRENT VERSION: v2.5.1**
 
 ## Get Started ##
 
