@@ -12,7 +12,7 @@ code and unneeded options.
 
 [demo]: http://akalicki.github.io/jquery-simple-gallery/
 
-**CURRENT VERSION: v2.5.1**
+**CURRENT VERSION: v2.6.0**
 
 ## Get Started ##
 
@@ -87,6 +87,14 @@ the source images used in the photo gallery.  The string supplied can be
 anything, so long as the selector `$(source)` will isolate all `<img>` tags 
 to be displayed in the gallery. A gallery's source collection can be also be 
 dynamically changed after instantiation.
+
++ `thumbExt` (optional, *default = ""*) - a substring thumbnail extension to 
+remove from the source image urls before they are displayed. This option 
+allows the use of different thumbnail images from the one displayed for speed 
+optimization or page styling. A source image with `src` "pic1Thumb.jpg" will 
+display "pic1.jpg" in the main window if `thumbExt` is set to "Thumb". The 
+gallery only removes the last occurence of `thumbExt` from the source image 
+`src`.
 
 + `animate` (optional, *default = true*) - a boolean true/false value 
 representing whether to animate the slideshow.  If false, the target display 

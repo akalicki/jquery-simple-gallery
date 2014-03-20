@@ -1,5 +1,5 @@
 /*
- * simple-gallery.js - v2.5.1
+ * simple-gallery.js - v2.6.0
  * Author: Alex Kalicki (https://github.com/akalicki)
  *
  * simple-gallery.js is a lightweight jQuery extension for quickly creating
@@ -15,6 +15,7 @@
         // default widget options
         options: {
             source: "",
+            thumbExt: "",
             animate: true,
             startImg: 0,
             waitTime: 5000,
@@ -120,7 +121,7 @@
             this._trigger('imageload');
             
             var selected = this.images.get(index);
-            var url = selected.src;
+            var url = this._removeLast(selected.src, this.options.thumbExt);
             this.element.css("background-image", "url(" + url + ")");
             this.images.removeClass(this.options.selectClass);
             selected.className += this.options.selectClass;
@@ -198,6 +199,15 @@
             self.cycle = window.setTimeout(function() {
                 self._loadNext();
             }, self.options.waitTime);
+        },
+
+        // helper: remove last occurence of substring
+        _removeLast: function(str, substr) {
+            var lastPos = str.lastIndexOf(substr);
+            if (lastPos == -1)
+                return str;
+            return str.substring(0, lastPos) + 
+                   str.substring(lastPos + substr.length);
         }
     
     });
